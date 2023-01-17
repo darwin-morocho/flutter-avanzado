@@ -6,10 +6,10 @@ import '../../../../domain/repositories/ws_repository.dart';
 class HomeBloc extends ChangeNotifier {
   HomeBloc({
     required WsRepository wsRepository,
-    required ExchangeRepositotory exchangeRepositotory,
+    required ExchangeRepository exchangeRepositotory,
   })  : _ws = wsRepository,
         _exchange = exchangeRepositotory;
 
   final WsRepository _ws;
-  final ExchangeRepositotory _exchange;
+  final ExchangeRepository _exchange;
 }

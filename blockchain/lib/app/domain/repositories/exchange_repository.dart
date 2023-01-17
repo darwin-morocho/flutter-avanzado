@@ -1,1 +1,1 @@
-abstract class ExchangeRepositotory {}
+abstract class ExchangeRepository {}
