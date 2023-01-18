@@ -3,5 +3,6 @@ enum HttpRequestFailure {
   notFound,
   server,
   unauthorized,
-  unknown,
+  badRequest,
+  local,
 }

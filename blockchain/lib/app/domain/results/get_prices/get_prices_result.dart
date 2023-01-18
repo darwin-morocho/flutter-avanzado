@@ -6,7 +6,7 @@ abstract class GetPricesResult {}
 class GetPricesSuccess extends GetPricesResult {
   GetPricesSuccess(this.cryptos);
 
-  final Map<String, Crypto> cryptos;
+  final List<Crypto> cryptos;
 }
 
 class GetPricesFailure extends GetPricesResult {
