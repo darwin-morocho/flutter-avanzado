@@ -1,34 +1,14 @@
-class Crypto {
-  final String id;
-  final String symbol;
-  final double price;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Crypto({
-    required this.id,
-    required this.symbol,
-    required this.price,
-  });
+part 'crypto.freezed.dart';
 
-  Crypto copyWith({
-    String? id,
-    String? symbol,
-    double? price,
-  }) {
-    return Crypto(
-      id: id ?? this.id,
-      symbol: symbol ?? this.symbol,
-      price: price ?? this.price,
-    );
-  }
-
-  @override
-  int get hashCode => symbol.hashCode ^ price.hashCode ^ id.hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    if (other is Crypto) {
-      return symbol == other.symbol && price == other.price && id == other.id;
-    }
-    return false;
-  }
+@freezed
+class Crypto with _$Crypto {
+  factory Crypto({
+    required String id,
+    required String symbol,
+    required String name,
+    required double price,
+    required double changePercent24Hr,
+  }) = _Crypto;
 }
