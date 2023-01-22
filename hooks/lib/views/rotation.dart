@@ -9,36 +9,26 @@ class RotationView extends StatefulWidget {
 
 class _RotationViewState extends State<RotationView>
     with WidgetsBindingObserver {
-  bool _listen = false;
+  ///
+  Size _size = WidgetsBinding.instance.window.physicalSize;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _listen = true,
-    );
-  }
-
-  @override
-  void deactivate() {
-    print('❌ deactivate');
-    WidgetsBinding.instance.removeObserver(this);
-    _listen = false;
-    super.deactivate();
   }
 
   @override
   void dispose() {
-    print('❌');
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
   void didChangeMetrics() {
-    if (_listen) {
-      final size = WidgetsBinding.instance.window.physicalSize;
+    final size = WidgetsBinding.instance.window.physicalSize;
+    if (_size != size) {
+      _size = size;
       final isPortraitMode = size.width < size.height;
       print('🥶 isPortraitMode $isPortraitMode');
     }
