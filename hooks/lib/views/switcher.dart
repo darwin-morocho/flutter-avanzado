@@ -56,7 +56,7 @@ class _PerformActionState extends State<PerformAction> {
   void didUpdateWidget(covariant PerformAction oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.type != widget.type) {
-      print('🔥');
+      print('🔥 ${oldWidget.type}');
       setState(() {
         _enabled = false;
       });

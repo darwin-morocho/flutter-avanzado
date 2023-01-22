@@ -8,4 +8,5 @@ class Routes {
   static const connectivity = '/connectivity';
   static const tabs = '/tabs';
   static const animated = '/animated';
+  static const rotation = '/rotation';
 }

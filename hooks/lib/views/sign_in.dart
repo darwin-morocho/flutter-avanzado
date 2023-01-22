@@ -57,8 +57,8 @@ class _SignInViewState extends State<SignInView> {
                     return ElevatedButton(
                       onPressed: () {
                         if (Form.of(context)?.validate() ?? false) {
-                          print('_username $_username');
-                          print('_password $_password');
+                          print('🥶 _username $_username');
+                          print('🥶 _password $_password');
                         }
                       },
                       child: const Text('Sign In'),
