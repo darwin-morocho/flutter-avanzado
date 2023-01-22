@@ -16,6 +16,7 @@ class _SwitcherViewState extends State<SwitcherView> {
       appBar: AppBar(
         actions: [
           DropdownButton(
+            value: _type,
             items: ['student', 'instructor']
                 .map(
                   (e) => DropdownMenuItem(
