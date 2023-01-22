@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../dialogs/confirm.dart';
-import 'menu.dart';
+import '../main.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

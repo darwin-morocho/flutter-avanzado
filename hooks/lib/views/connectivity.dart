@@ -50,7 +50,10 @@ class _ConnectivityViewState extends State<ConnectivityView> {
           if (_subscription == null) {
             return const CircularProgressIndicator();
           }
-          return Text(_result.name);
+          return Text(
+            _result.name,
+            style: const TextStyle(fontSize: 25),
+          );
         }(),
       ),
     );
