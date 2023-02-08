@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class AnimatedView extends StatefulWidget {
+class AnimatedView extends HookWidget {
   const AnimatedView({super.key});
 
   @override
-  State<AnimatedView> createState() => _AnimatedViewState();
-}
-
-class _AnimatedViewState extends State<AnimatedView>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
+  Widget build(BuildContext context) {
+    final controller = useAnimationController(
       duration: const Duration(
         milliseconds: 400,
       ),
     );
-    _animation = TweenSequence<double>(
+
+    final animation = TweenSequence<double>(
       [
         TweenSequenceItem(
           tween: Tween(begin: 1.0, end: 1.8),
@@ -33,30 +24,21 @@ class _AnimatedViewState extends State<AnimatedView>
         ),
       ],
     ).animate(
-      _controller,
+      controller,
     );
-  }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+    void startAnimation() {
+      controller.forward(from: 0);
+    }
 
-  void _startAnimation() {
-    _controller.forward(from: 0);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
         child: AnimatedBuilder(
-          animation: _animation,
+          animation: animation,
           builder: (_, child) {
             return Transform.scale(
-              scale: _animation.value,
+              scale: animation.value,
               child: child!,
             );
           },
@@ -68,7 +50,7 @@ class _AnimatedViewState extends State<AnimatedView>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _startAnimation,
+        onPressed: startAnimation,
         child: const Icon(
           Icons.play_arrow,
         ),

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class SignInView extends StatefulWidget {
+class SignInView extends HookWidget {
   const SignInView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
-}
-
-class _SignInViewState extends State<SignInView> {
-  String _username = '', _password = '';
-
-  @override
   Widget build(BuildContext context) {
+    final username = useRef('');
+    final password = useRef('');
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -26,7 +23,7 @@ class _SignInViewState extends State<SignInView> {
                     border: OutlineInputBorder(),
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  onChanged: (text) => _username = text,
+                  onChanged: (text) => username.value = text,
                   validator: (text) {
                     text = text?.trim() ?? '';
                     if (text.isEmpty) {
@@ -42,7 +39,7 @@ class _SignInViewState extends State<SignInView> {
                     border: OutlineInputBorder(),
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  onChanged: (text) => _password = text,
+                  onChanged: (text) => password.value = text,
                   validator: (text) {
                     text = text?.trim() ?? '';
                     if (text.isEmpty) {
@@ -56,9 +53,9 @@ class _SignInViewState extends State<SignInView> {
                   builder: (context) {
                     return ElevatedButton(
                       onPressed: () {
-                        if (Form.of(context)?.validate() ?? false) {
-                          print('🥶 _username $_username');
-                          print('🥶 _password $_password');
+                        if (Form.of(context).validate()) {
+                          print('🥶 _username ${username.value}');
+                          print('🥶 _password ${password.value}');
                         }
                       },
                       child: const Text('Sign In'),

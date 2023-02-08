@@ -1,44 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class RotationView extends StatefulWidget {
+import '../hooks/rotation_hook.dart';
+import '../hooks/timer_hook.dart';
+
+class RotationView extends HookWidget {
   const RotationView({super.key});
 
   @override
-  State<RotationView> createState() => _RotationViewState();
-}
-
-class _RotationViewState extends State<RotationView>
-    with WidgetsBindingObserver {
-  ///
-  Size _size = WidgetsBinding.instance.window.physicalSize;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeMetrics() {
-    final size = WidgetsBinding.instance.window.physicalSize;
-    if (_size != size) {
-      _size = size;
-      final isPortraitMode = size.width < size.height;
-      print('🥶 isPortraitMode $isPortraitMode');
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    useRotationListener(
+      (orientation) {
+        print(orientation);
+      },
+    );
+    final counter = useTimer(
+      const Duration(seconds: 1),
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rotation listener'),
+      ),
+      body: Center(
+        child: Text('$counter'),
       ),
     );
   }

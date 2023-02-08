@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class SwitcherView extends StatefulWidget {
   const SwitcherView({super.key});
@@ -42,36 +43,37 @@ class _SwitcherViewState extends State<SwitcherView> {
   }
 }
 
-class PerformAction extends StatefulWidget {
+class PerformAction extends HookWidget {
   const PerformAction({super.key, required this.type});
   final String type;
 
   @override
-  State<PerformAction> createState() => _PerformActionState();
-}
-
-class _PerformActionState extends State<PerformAction> {
-  bool _enabled = false;
-
-  @override
-  void didUpdateWidget(covariant PerformAction oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.type != widget.type) {
-      print('🔥 ${oldWidget.type}');
-      setState(() {
-        _enabled = false;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final enabled = useState(false);
+
+    useValueChanged(
+      enabled.value,
+      (_, __) {
+        print('🐶');
+        return '';
+      },
+    );
+
+    useValueChanged(
+      type,
+      (oldValue, _) {
+        print('✅');
+        enabled.value = false;
+        return '';
+      },
+    );
+
     return SwitchListTile(
-      value: _enabled,
+      value: enabled.value,
       title: const Text('Enabled'),
-      onChanged: (value) => setState(() {
-        _enabled = value;
-      }),
+      onChanged: (value) {
+        enabled.value = value;
+      },
     );
   }
 }

@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../dialogs/confirm.dart';
 import '../main.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends HookWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
   Widget build(BuildContext context) {
+    final mountedFn = useIsMounted();
     return Scaffold(
       appBar: AppBar(),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
             final ok = await showConfirmDialog(context);
+            final mounted = mountedFn();
             if (ok && mounted) {
               Navigator.pushAndRemoveUntil(
                 context,

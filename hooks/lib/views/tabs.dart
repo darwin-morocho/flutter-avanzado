@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class TabsView extends StatelessWidget {
   const TabsView({super.key});
@@ -31,17 +32,12 @@ class TabsView extends StatelessWidget {
   }
 }
 
-class MyList extends StatefulWidget {
+class MyList extends HookWidget {
   const MyList({super.key});
 
   @override
-  State<MyList> createState() => _MyListState();
-}
-
-class _MyListState extends State<MyList> with AutomaticKeepAliveClientMixin {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
+    useAutomaticKeepAlive();
     return ListView.builder(
       itemBuilder: (_, index) => ListTile(
         title: Text('$index'),
@@ -49,7 +45,4 @@ class _MyListState extends State<MyList> with AutomaticKeepAliveClientMixin {
       itemCount: 200,
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
