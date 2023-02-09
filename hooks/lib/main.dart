@@ -6,6 +6,7 @@ import 'views/connectivity.dart';
 import 'views/counter.dart';
 import 'views/home.dart';
 import 'views/rotation.dart';
+import 'views/search.dart';
 import 'views/sign_in.dart';
 import 'views/splash.dart';
 import 'views/switcher.dart';
@@ -41,6 +42,7 @@ Map<String, WidgetBuilder> get appRoutes {
     Routes.tabs: (_) => const TabsView(),
     Routes.signIn: (_) => const SignInView(),
     Routes.animated: (_) => const AnimatedView(),
+    Routes.search: (_) => const SearchView(),
     Routes.connectivity: (_) => const ConnectivityView(),
     Routes.rotation: (_) => const RotationView(),
   };
