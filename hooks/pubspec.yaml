@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   connectivity_plus: ^3.0.2
   flutter_hooks: ^0.18.5+1
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:

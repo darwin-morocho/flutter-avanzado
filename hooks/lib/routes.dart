@@ -9,4 +9,5 @@ class Routes {
   static const tabs = '/tabs';
   static const animated = '/animated';
   static const rotation = '/rotation';
+  static const search = '/search';
 }
