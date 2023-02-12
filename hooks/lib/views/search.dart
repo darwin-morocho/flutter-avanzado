@@ -1,50 +1,35 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class SearchView extends StatefulWidget {
+class SearchView extends HookWidget {
   const SearchView({super.key});
 
   @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
-  final _textEditingController = TextEditingController();
-  final _scrollController = ScrollController();
-
-  late List<String> _users;
-  final _query = ValueNotifier('');
-
-  @override
-  void initState() {
-    super.initState();
-    final faker = Faker();
-    _users = List.generate(
-      1000,
-      (_) => faker.person.name(),
-    );
-  }
-
-  @override
-  void dispose() {
-    _query.dispose();
-    _textEditingController.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _scrollToTop() {
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        0,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.linear,
-      );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final textEditingController = useTextEditingController();
+    final scrollController = useScrollController();
+    final query = useValueNotifier('');
+    final users = useMemoized(
+      () {
+        final faker = Faker();
+        return List.generate(
+          1000,
+          (_) => faker.person.name(),
+        );
+      },
+    );
+
+    void scrollToTop() {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(
+          0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.linear,
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -53,13 +38,13 @@ class _SearchViewState extends State<SearchView> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: TextField(
-          controller: _textEditingController,
-          onChanged: (text) => _query.value = text.trim(),
+          controller: textEditingController,
+          onChanged: (text) => query.value = text.trim(),
           decoration: InputDecoration(
             suffixIcon: IconButton(
               onPressed: () {
-                _textEditingController.clear();
-                _query.value = '';
+                textEditingController.clear();
+                query.value = '';
                 FocusManager.instance.primaryFocus?.unfocus();
               },
               icon: const Icon(Icons.clear),
@@ -68,18 +53,18 @@ class _SearchViewState extends State<SearchView> {
         ),
       ),
       body: ValueListenableBuilder(
-        valueListenable: _query,
+        valueListenable: query,
         builder: (_, query, __) {
           final filteredUsers = query.isEmpty
-              ? _users
-              : _users
+              ? users
+              : users
                   .where(
                     (e) => e.toLowerCase().contains(query.toLowerCase()),
                   )
                   .toList();
 
           return ListView.builder(
-            controller: _scrollController,
+            controller: scrollController,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             itemBuilder: (_, index) => ListTile(
               title: Text(
@@ -91,7 +76,7 @@ class _SearchViewState extends State<SearchView> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _scrollToTop,
+        onPressed: scrollToTop,
         child: const Icon(
           Icons.arrow_upward,
         ),

@@ -6,19 +6,28 @@ class FutureView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ref = useState(0);
     final future = useMemoized(
       () => Future.delayed(
         const Duration(seconds: 2),
       ),
+      [ref.value],
     );
 
-    final snapshot = useFuture(future);
-
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref.value++;
+        },
+      ),
       body: Center(
-        child: snapshot.connectionState == ConnectionState.waiting
-            ? const CircularProgressIndicator()
-            : const Text('HELLO'),
+        child: FutureBuilder(
+          future: future,
+          builder: (_, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? const CircularProgressIndicator()
+                  : const Text('HELLO'),
+        ),
       ),
     );
   }
