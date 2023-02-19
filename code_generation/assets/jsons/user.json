@@ -1,11 +1,11 @@
 {
   "avatar": {
-      "gravatar": {
-          "hash": "28aa6011f4d69c1b5d5a2c6fcf54cdcf"
-      },
-      "tmdb": {
-          "avatar_path": "/jOl2OWDB662dKreKY2FoYAh1mg3.jpg"
-      }
+    "gravatar": {
+      "hash": "28aa6011f4d69c1b5d5a2c6fcf54cdcf"
+    },
+    "tmdb": {
+      "avatar_path": "https://image.tmdb.org/t/p/w500/jOl2OWDB662dKreKY2FoYAh1mg3.jpg"
+    }
   },
   "id": 15160447,
   "iso_639_1": "es",

@@ -36,7 +36,10 @@ class _MoviesViewState extends State<MoviesView> {
             if (movies != null) {
               return GridView.builder(
                 itemBuilder: (_, index) {
-                  return Text('$index');
+                  final movie = movies[index];
+                  return Image.network(
+                    movie.posterPath,
+                  );
                 },
                 itemCount: movies.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
