@@ -38,7 +38,9 @@ class _AccountViewState extends State<AccountView> {
       body: Center(
         child: _user != null
             ? Column(
-                children: const [],
+                children: const [
+                  Text('User'),
+                ],
               )
             : const CircularProgressIndicator(),
       ),
