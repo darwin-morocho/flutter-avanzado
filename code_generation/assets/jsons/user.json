@@ -12,5 +12,15 @@
   "iso_3166_1": "US",
   "name": "",
   "include_adult": false,
-  "username": "meedu"
+  "username": "meedu",
+  "occupations": [
+    {
+      "id": 123,
+      "name": "Flutter dev"
+    },
+    {
+      "id": 124,
+      "name": "Singer"
+    }
+  ]
 }
