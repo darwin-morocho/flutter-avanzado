@@ -1,20 +1,6 @@
 part of '../home_bloc.dart';
 
-mixin _WsMixin on Bloc<HomeEvent, HomeState> {
-  WsRepository get _wsRepository;
-  StreamSubscription? _pricesSubscription, _wsSubscription;
-
-  final _ids = [
-    'bitcoin',
-    'ethereum',
-    'tether',
-    'binance-coin',
-    'monero',
-    'litecoin',
-    'usd-coin',
-    'dogecoin',
-  ];
-
+extension _WsExtension on HomeBloc {
   void _onUpdateWsStatus(
     UpdateWsStatusEvent event,
     Emitter<HomeState> emit,

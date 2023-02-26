@@ -8,11 +8,10 @@ import '../../../../domain/repositories/ws_repository.dart';
 import 'home_events.dart';
 import 'home_state.dart';
 
-part 'mixins/on_update_crypto_prices_mixin.dart';
-part 'mixins/ws_mixin.dart';
+part 'extensions/update_crypto_prices.dart';
+part 'extensions/ws.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState>
-    with _OnUpdateCryptoPricesMixin, _WsMixin {
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(
     super.initialState, {
     required this.exchangeRepository,
@@ -24,10 +23,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState>
     on<DeleteEvent>(_onDelete);
   }
 
-  @override
   final WsRepository _wsRepository;
+  StreamSubscription? _pricesSubscription, _wsSubscription;
 
   final ExchangeRepository exchangeRepository;
+
+  final _ids = [
+    'bitcoin',
+    'ethereum',
+    'tether',
+    'binance-coin',
+    'monero',
+    'litecoin',
+    'usd-coin',
+    'dogecoin',
+  ];
 
   Future<void> _onInitialize(
     InitializeEvent event,

@@ -1,6 +1,6 @@
 part of '../home_bloc.dart';
 
-mixin _OnUpdateCryptoPricesMixin on Bloc<HomeEvent, HomeState> {
+extension _UpdateCryptoPricesExtension on HomeBloc {
   void _onUpdateCryptoPrices(
     UpdateCryptoPricesEvent event,
     Emitter<HomeState> emit,
