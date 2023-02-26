@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/models/user.dart';
+import '../../../../domain/models/user_model.dart';
 import '../../../../domain/repositories/account_repository.dart';
 
 class AccountView extends StatefulWidget {
@@ -38,8 +38,26 @@ class _AccountViewState extends State<AccountView> {
       body: Center(
         child: _user != null
             ? Column(
-                children: const [
-                  Text('User'),
+                children: [
+                  Text(
+                    _user!.id.toString(),
+                  ),
+                  Text(_user!.username),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _user = _user!.copyWith(
+                          id: 1234564,
+                          age: null,
+                          username: DateTime.now().toString(),
+                        );
+                      });
+                    },
+                    child: Image.network(_user!.avatar),
+                  ),
+                  Text(
+                    _user!.occupations.toString(),
+                  ),
                 ],
               )
             : const CircularProgressIndicator(),

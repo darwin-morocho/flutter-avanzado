@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/models/movie.dart';
+import '../../../../domain/models/movie_model.dart';
 import '../../../../domain/repositories/movies_repository.dart';
 
 class MoviesView extends StatefulWidget {
@@ -37,8 +37,17 @@ class _MoviesViewState extends State<MoviesView> {
               return GridView.builder(
                 itemBuilder: (_, index) {
                   final movie = movies[index];
-                  return Image.network(
-                    movie.posterPath,
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: Image.network(
+                          movie.posterPath,
+                        ),
+                      ),
+                      Text(
+                        movie.formattedDate(),
+                      ),
+                    ],
                   );
                 },
                 itemCount: movies.length,
@@ -49,7 +58,7 @@ class _MoviesViewState extends State<MoviesView> {
             }
 
             return Text(
-              snapshot.error.toString(),
+              snapshot.stackTrace.toString(),
             );
           },
         ),

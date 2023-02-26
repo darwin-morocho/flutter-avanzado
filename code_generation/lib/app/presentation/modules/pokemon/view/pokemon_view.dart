@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
+import '../../../generated/assets.gen.dart';
+
 class PokemonView extends StatefulWidget {
   const PokemonView({super.key});
 
@@ -44,8 +46,7 @@ class _PokemonViewState extends State<PokemonView> {
         child: Stack(
           children: [
             Positioned.fill(
-              child: Image.asset(
-                'assets/images/background.jpg',
+              child: Assets.images.background.image(
                 fit: BoxFit.cover,
               ),
             ),
@@ -63,7 +64,7 @@ class _PokemonViewState extends State<PokemonView> {
                 child: SizedBox(
                   height: 400,
                   child: RiveAnimation.asset(
-                    'assets/animations/pokemon.riv',
+                    Assets.animations.pokemon,
                     controllers: [
                       _controller,
                     ],

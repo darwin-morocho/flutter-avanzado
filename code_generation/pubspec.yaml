@@ -33,11 +33,17 @@ dependencies:
   cupertino_icons: ^1.0.2
   rive: ^0.10.2
   provider: ^6.0.5
+  json_annotation: ^4.8.0
+  freezed_annotation: ^2.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.3
+  json_serializable: ^6.6.1
+  freezed: ^2.3.2
+  flutter_gen_runner: ^5.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -77,3 +83,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_gen:
+  output: lib/app/presentation/generated/
+  
