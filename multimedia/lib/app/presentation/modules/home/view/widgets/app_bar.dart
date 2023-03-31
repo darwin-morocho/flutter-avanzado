@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../global/icons/custom_icons.dart';
 import 'circle_button.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   const HomeAppBar({super.key});
 
   @override
@@ -50,4 +50,7 @@ class HomeAppBar extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

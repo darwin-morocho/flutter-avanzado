@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../domain/models/publication.dart';
+import '../../../../global/widgets/video_player/video_player_view.dart';
 import 'avatar.dart';
 
 class PublicationItem extends StatelessWidget {
@@ -76,8 +77,11 @@ class PublicationItem extends StatelessWidget {
               ],
             ),
           ),
-          const AspectRatio(
+          AspectRatio(
             aspectRatio: 16 / 9,
+            child: VideoPlayerView(
+              video: publication.video,
+            ),
           ),
           Padding(
             padding: padding.copyWith(
